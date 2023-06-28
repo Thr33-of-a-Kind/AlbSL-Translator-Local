@@ -34,7 +34,7 @@ model_option = st.selectbox(
 absolute_path = os.path.dirname(__file__)
 
 
-@st.cache_data
+@st.cache_resource
 def load_labels():
     labels_path = absolute_path + "/labels.txt"
     labels = {}
@@ -48,7 +48,7 @@ def load_labels():
     return labels
 
 
-@st.cache_data
+@st.cache_resource
 def load_models():
     models = {}
 
@@ -104,6 +104,8 @@ def callback(frame):
 
         dataAux = np.pad(dataAux, (0, 84 - len(dataAux)))
 
+        print(models)
+        print(model_option)
         model = models[model_option]
 
         prediction = model.predict([np.asarray(dataAux)])
